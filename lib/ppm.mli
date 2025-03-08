@@ -1,0 +1,1 @@
+val write_ppm : string -> int -> int -> (int -> int -> int * int * int) -> unit
