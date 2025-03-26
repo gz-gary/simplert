@@ -57,7 +57,7 @@ let tbn (n : vec3) : vec3 * vec3 =
       if 1.0 -. (Float.abs z) < Float.epsilon then vec_cross (1.0, 0.0, 0.0) n
       else vec_cross (0.0, 0.0, 1.0) n in
     let b = vec_cross n t in
-    (t, b)
+    (vec_normalized t, vec_normalized b)
     
 let gamma_correction (gamma : float) (f : float) : float = 
   Float.pow f gamma
