@@ -1,0 +1,1 @@
+type primitives = Triangle of Triangle.triangle | Sphere of Sphere.sphere
