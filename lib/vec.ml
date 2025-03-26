@@ -59,6 +59,12 @@ let tbn (n : vec3) : vec3 * vec3 =
     let b = vec_cross n t in
     (t, b)
     
+let gamma_correction (gamma : float) (f : float) : float = 
+  Float.pow f gamma
+
+let vec_gamma_correction (gamma : float) (v : vec3) : vec3 =
+  match v with
+  | (r, g, b) -> let f = gamma_correction gamma in (f r, f g, f b)
 
 let ( +| ) = vec_add
 let ( -| ) = vec_sub
