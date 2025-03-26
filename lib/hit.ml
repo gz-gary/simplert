@@ -12,6 +12,7 @@ let hit (r : ray) (p : primitives) : hit_record option =
   match p with
   | Triangle t -> Triangle.hit r t
   | Sphere s -> Sphere.hit r s
+  | Panel p -> Panel.hit r p
 
 let rec hit_objs (r : ray) (objs : hittable list) : hit_record_with_mat option =
   match objs with
