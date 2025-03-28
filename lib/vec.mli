@@ -13,3 +13,4 @@ val vec_neg : vec3 -> vec3
 val vec_mul : vec3 -> vec3 -> vec3
 val tbn : vec3 -> vec3 * vec3
 val vec_gamma_correction : float -> vec3 -> vec3
+val vec_cosine : vec3 -> vec3 -> float

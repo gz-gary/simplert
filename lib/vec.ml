@@ -40,7 +40,9 @@ let vec_cross (a : vec3) (b : vec3) : vec3 =
 
 let vec_toint (v : vec3) : int * int * int =
   match v with
-  | (x, y, z) -> (int_of_float x, int_of_float y, int_of_float z)
+  | (x, y, z) -> 
+    match (int_of_float x, int_of_float y, int_of_float z) with
+    | (a, b, c) -> (min 255 a, min 255 b, min 255 c)
 
 let vec_neg (v : vec3) : vec3 =
   match v with
@@ -65,6 +67,9 @@ let gamma_correction (gamma : float) (f : float) : float =
 let vec_gamma_correction (gamma : float) (v : vec3) : vec3 =
   match v with
   | (r, g, b) -> let f = gamma_correction gamma in (f r, f g, f b)
+
+let vec_cosine (a : vec3) (b : vec3) : float = 
+  vec_dot a b /. (vec_len a *. vec_len b)
 
 let ( +| ) = vec_add
 let ( -| ) = vec_sub
