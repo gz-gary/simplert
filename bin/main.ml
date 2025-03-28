@@ -33,15 +33,16 @@ let () =
   let eye = (0.0, 0.0, 0.3) in
   let lookat = (0.0, 0.5, 0.0) in
   let up = vec_normalized (0.0, 0.0, 1.0) in
+  let normalized_lookat = vec_normalized (lookat -| eye) +| eye in
   let axis_y = vec_normalized (vec_cross (lookat -| eye) up) in
   let axis_x = vec_normalized (vec_neg (vec_cross axis_y (lookat -| eye))) in
-  let corner = lookat -| ((float_of_int width /. 2.0) *. ratio *| axis_y) -| ((float_of_int height /. 2.0) *. ratio *| axis_x) in
+  let corner = normalized_lookat -| ((float_of_int width /. 2.0) *. ratio *| axis_y) -| ((float_of_int height /. 2.0) *. ratio *| axis_x) in
   let example x y =
     vec_toint (List.fold_left ( +| ) (0.0, 0.0, 0.0) (
       List.init multi_sampling_per_pix (fun _ -> 
         let gamma = 0.5 in
         let shade_point = corner +| ((float_of_int y +. Random.float 1.0) *. ratio *| axis_y) +| ((float_of_int x +. Random.float 1.0) *. ratio *| axis_x) in
-        vec_gamma_correction gamma (trace { origin = shade_point; direction = vec_normalized (shade_point -| eye) }) |* 255.0
+        vec_gamma_correction gamma (trace { origin = eye; direction = vec_normalized (shade_point -| eye) }) |* 255.0
       )
     ) |/ (float_of_int multi_sampling_per_pix))
   in
