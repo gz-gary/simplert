@@ -49,13 +49,13 @@ let rec shade (p : vec3) (norm : vec3) (brdf : vec3 -> vec3 -> vec3) (wo : vec3)
 
 let () =
   Random.self_init();
-  let width = 400 in
-  let height = 400 in
-  let ratio = 0.005 in
-  let multi_sampling_per_pix = 100 in
-  let eye = (0.0, -2.0, 1.0) in
-  let lookat = (0.0, 1.0, 0.0) in
-  let up = vec_normalized (0.0, 0.0, 1.0) in
+  let width = 1440 in
+  let height = 1440 in
+  let ratio = 0.00046 in
+  let multi_sampling_per_pix = 30 in
+  let eye = (0.0, 0.5, 6.0) in
+  let lookat = (0.0, 0.5, 0.0) in
+  let up = vec_normalized (0.0, 1.0, 0.0) in
   let view_dir = vec_normalized (lookat -| eye) in
   let normalized_lookat = eye +| view_dir in
   let axis_y = vec_normalized (vec_cross view_dir up) in

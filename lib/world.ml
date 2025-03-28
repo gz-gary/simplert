@@ -1,35 +1,19 @@
 open Material
 open Primitives
-(* open Sphere *)
-(* open Triangle *)
+(* open Box *)
 open Panel
 open Hit
 
-(* let world = [
-  (* { shape = Sphere { center = (0.0, 2.0, 0.0); radius = 1.0; }; mat = BRDF lambert_brdf }; *)
-  { shape = Sphere { center = (0.0, 2.5, 0.5); radius = 0.5; }; mat = Light (fuse_light (5.0, 5.0, 5.0)) };
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (-1.5, 3.0, -1.0); v3 = (-1.5, 3.0, 1.0)} ; mat = Light (fuse_light (1.0, 1.0, 1.0)); }; *)
-  (* { shape = Triangle { v1 = (-1.5, 3.0, -1.0); v2 = (1.5, 4.0, -1.0); v3 = (0.0, 3.0, 2.0) } ; mat = Light (fuse_light (1.0, 1.0, 1.0)); }; *)
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (-1.5, 3.0, -1.0); v3 = (-1.5, 3.0, 1.0)} ; mat = BRDF lambert_brdf; }; *)
-  (* { shape = Triangle { v1 = (-1.5, 3.0, -1.0); v2 = (1.5, 3.0, -1.0); v3 = (0.0, 3.0, 2.0) } ; mat = BRDF lambert_brdf; }; *)
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (1.5, 1.0, -1.0); v3 = (1.5, 4.0, -1.0) } ; mat = Light (fuse_light (5.0, 5.0, 5.0)); }; *)
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (1.5, 4.0, -1.0); v3 = (-1.5, 4.0, -1.0) } ; mat = Light (fuse_light (5.0, 5.0, 5.0)); }; *)
-  { shape = Panel { base = (-1.5, -3.0, -1.0); d1 = (3.0, 0.0, 0.0); d2 = (0.0, 7.0, 0.0); } ; mat = BRDF lambert_brdf; };
-  { shape = Panel { base = (-1.5, -3.0, -1.0); d1 = (0.0, 7.0, 0.0); d2 = (0.0, 0.0, 3.0); } ; mat = BRDF lambert_brdf; };
-  { shape = Panel { base = (1.5, -3.0, -1.0); d1 = (0.0, 0.0, 3.0); d2 = (0.0, 7.0, 0.0); } ; mat = BRDF lambert_brdf; };
-  { shape = Panel { base = (-1.5, -3.0, 2.0); d1 = (0.0, 7.0, 0.0); d2 = (3.0, 0.0, 0.0); } ; mat = BRDF lambert_brdf; };
-  { shape = Panel { base = (-1.5, 4.0, -1.0); d1 = (3.0, 0.0, 0.0); d2 = (0.0, 0.0, 3.0); } ; mat = BRDF lambert_brdf; };
-  { shape = Panel { base = (-1.5, -3.0, -1.0); d1 = (0.0, 0.0, 3.0); d2 = (3.0, 0.0, 0.0); } ; mat = BRDF lambert_brdf; };
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (1.5, 1.0, -1.0); v3 = (1.5, 4.0, -1.0) } ; mat = BRDF lambert_brdf; }; *)
-  (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (1.5, 4.0, -1.0); v3 = (-1.5, 4.0, -1.0) } ; mat = BRDF lambert_brdf; }; *)
-] *)
-
 let lights = 
-  { shape = Panel { base = (-1.0, 1.0, 2.0); edge0 = (0.0, 2.0, 0.0); edge1 = (2.0, 0.0, 0.0); }; mat = Light (fuse_light (30.0, 30.0, 30.0)) }
-  (* { shape = Sphere { center = (0.0, 2.0, 0.0); radius = 1.0; }; mat = Light (fuse_light (5.0, 5.0, 5.0)) }; *)
+  { shape = Panel { base = (-0.3, 1.99, -0.3); edge0 = (0.6, 0.0, 0.0); edge1 = (0.0, 0.0, 0.6); }; mat = Light (fuse_light (200.0, 200.0, 200.0)) }
 
 let world = [
   lights;
-  { shape = Sphere { center = (0.0, 1.5, -0.5); radius = 0.5; } ; mat = BRDF (lambert_brdf (1.0, 0.6, 0.6)); };
-  { shape = Panel { base = (-100.0, -100.0, -1.0); edge0 = (200.0, 0.0, 0.0); edge1 = (0.0, 200.0, 0.0); } ; mat = BRDF (lambert_brdf (0.6, 1.0, 0.6)); };
+  { shape = Panel { base = (-1.5, -1.0, -1.5); edge0 = (0.0, 0.0, 3.0); edge1 = (3.0, 0.0, 0.0); } ; mat = BRDF (lambert_brdf (0.5, 0.5, 0.5)); };
+  { shape = Panel { base = (-1.5, 2.0, -1.5); edge0 = (3.0, 0.0, 0.0); edge1 = (0.0, 0.0, 3.0); } ; mat = BRDF (lambert_brdf (0.8, 0.8, 0.8)); };
+  { shape = Panel { base = (-1.5, -1.0, -1.5); edge0 = (0.0, 3.0, 0.0); edge1 = (0.0, 0.0, 3.0); } ; mat = BRDF (lambert_brdf (0.7, 0.3, 0.3)); };
+  { shape = Panel { base = (1.5, -1.0, -1.5); edge0 = (0.0, 0.0, 3.0); edge1 = (0.0, 3.0, 0.0); } ; mat = BRDF (lambert_brdf (0.3, 0.7, 0.3)); };
+  { shape = Panel { base = (1.5, -1.0, -1.5); edge0 = (0.0, 3.0, 0.0); edge1 = (-3.0, 0.0, 0.0); } ; mat = BRDF (lambert_brdf (0.5, 0.5, 0.5)); };
+  { shape = Box { base = (-0.3, -1.0, -0.7); edgex = (-0.6, 0.0, 0.4); edgey = (0.4, 0.0, 0.6); edgez = (0.0, 2.0, 0.0); }; mat = BRDF (lambert_brdf (0.5, 0.5, 0.5)); } ;
+  { shape = Box { base = (1.1, -1.0, 0.2); edgex = (-0.6, 0.0, -0.4); edgey = (-0.4, 0.0, 0.6); edgez = (0.0, 1.0, 0.0); }; mat = BRDF (lambert_brdf (0.5, 0.5, 0.5)); }
 ]
