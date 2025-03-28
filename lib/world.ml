@@ -1,6 +1,6 @@
 open Material
 open Primitives
-open Sphere
+(* open Sphere *)
 (* open Triangle *)
 open Panel
 open Hit
@@ -24,7 +24,12 @@ open Hit
   (* { shape = Triangle { v1 = (-1.5, 1.0, -1.0); v2 = (1.5, 4.0, -1.0); v3 = (-1.5, 4.0, -1.0) } ; mat = BRDF lambert_brdf; }; *)
 ] *)
 
+let lights = 
+  { shape = Panel { base = (-1.0, 1.0, 2.0); d1 = (0.0, 2.0, 0.0); d2 = (2.0, 0.0, 0.0); }; mat = Light (fuse_light (10.0, 10.0, 10.0)) }
+  (* { shape = Sphere { center = (0.0, 2.0, 0.0); radius = 1.0; }; mat = Light (fuse_light (5.0, 5.0, 5.0)) }; *)
+
 let world = [
-  { shape = Sphere { center = (0.0, 2.0, 0.0); radius = 1.0; }; mat = Light (fuse_light (5.0, 5.0, 5.0)) };
+  lights;
+  { shape = Sphere { center = (0.0, 1.5, -0.5); radius = 0.5; } ; mat = BRDF lambert_brdf; };
   { shape = Panel { base = (-100.0, -100.0, -1.0); d1 = (200.0, 0.0, 0.0); d2 = (0.0, 200.0, 0.0); } ; mat = BRDF lambert_brdf; };
 ]
