@@ -16,7 +16,7 @@ let rec shade (p : vec3) (norm : vec3) (brdf : vec3 -> vec3 -> vec3) (wo : vec3)
       match hit_objs r world with
       | None -> (0.0, 0.0, 0.0)
       | Some (hitrec, mat) ->
-        if vec_len (hitrec.hit_point -| point) < Float.epsilon then
+        if vec_len (hitrec.hit_point -| point) < 0.0001 then
           match mat with
           | Light light -> 
             let cosine1 = vec_cosine norm wi in
@@ -52,8 +52,8 @@ let () =
   let width = 400 in
   let height = 400 in
   let ratio = 0.005 in
-  let multi_sampling_per_pix = 100 in
-  let eye = (0.0, -1.0, 1.0) in
+  let multi_sampling_per_pix = 50 in
+  let eye = (0.0, -2.0, 1.0) in
   let lookat = (0.0, 1.0, 0.0) in
   let up = vec_normalized (0.0, 0.0, 1.0) in
   let view_dir = vec_normalized (lookat -| eye) in
