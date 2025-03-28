@@ -13,10 +13,10 @@ let rec shade (p : vec3) (norm : vec3) (brdf : vec3 -> vec3 -> vec3) (wo : vec3)
     | (point, pdf) -> 
       let wi = vec_normalized (point -| p) in
       let r = { origin = p; direction = wi; } in
-      match hit_objs r world with
+      match hit_world r world with
       | None -> (0.0, 0.0, 0.0)
       | Some (hitrec, mat) ->
-        if vec_len (hitrec.hit_point -| point) < 0.0001 then
+        if vec_len (hitrec.hit_point -| point) < 0.001 then
           match mat with
           | Light light -> 
             let cosine1 = vec_cosine norm wi in
@@ -35,7 +35,7 @@ let rec shade (p : vec3) (norm : vec3) (brdf : vec3 -> vec3 -> vec3) (wo : vec3)
       let wi = (wi_x *| t) +| (wi_y *| b) +| (wi_z *| norm) in
       let cosine = wi_z in
       let r = { origin = p; direction = wi; } in
-      match hit_objs r world with
+      match hit_world r world with
       | None -> (0.0, 0.0, 0.0)
       | Some (hitrec, mat) ->
         match mat with
@@ -52,7 +52,7 @@ let () =
   let width = 400 in
   let height = 400 in
   let ratio = 0.005 in
-  let multi_sampling_per_pix = 50 in
+  let multi_sampling_per_pix = 100 in
   let eye = (0.0, -2.0, 1.0) in
   let lookat = (0.0, 1.0, 0.0) in
   let up = vec_normalized (0.0, 0.0, 1.0) in
@@ -68,7 +68,7 @@ let () =
         let shade_point = corner +| ((float_of_int y +. Random.float 1.0) *. ratio *| axis_y) +| ((float_of_int x +. Random.float 1.0) *. ratio *| axis_x) in
         vec_gamma_correction gamma (
           let wo = vec_normalized (shade_point -| eye) in
-          match hit_objs { origin = eye; direction = wo; } world with
+          match hit_world { origin = eye; direction = wo; } world with
           | None -> (0.0, 0.0, 0.0)
           | Some (hitrec, mat) ->
             match mat with

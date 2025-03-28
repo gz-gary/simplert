@@ -25,11 +25,11 @@ open Hit
 ] *)
 
 let lights = 
-  { shape = Panel { base = (-1.0, 1.0, 2.0); d1 = (0.0, 2.0, 0.0); d2 = (2.0, 0.0, 0.0); }; mat = Light (fuse_light (30.0, 30.0, 30.0)) }
+  { shape = Panel { base = (-1.0, 1.0, 2.0); edge0 = (0.0, 2.0, 0.0); edge1 = (2.0, 0.0, 0.0); }; mat = Light (fuse_light (30.0, 30.0, 30.0)) }
   (* { shape = Sphere { center = (0.0, 2.0, 0.0); radius = 1.0; }; mat = Light (fuse_light (5.0, 5.0, 5.0)) }; *)
 
 let world = [
   lights;
   { shape = Sphere { center = (0.0, 1.5, -0.5); radius = 0.5; } ; mat = BRDF (lambert_brdf (1.0, 0.6, 0.6)); };
-  { shape = Panel { base = (-100.0, -100.0, -1.0); d1 = (200.0, 0.0, 0.0); d2 = (0.0, 200.0, 0.0); } ; mat = BRDF (lambert_brdf (0.6, 1.0, 0.6)); };
+  { shape = Panel { base = (-100.0, -100.0, -1.0); edge0 = (200.0, 0.0, 0.0); edge1 = (0.0, 200.0, 0.0); } ; mat = BRDF (lambert_brdf (0.6, 1.0, 0.6)); };
 ]

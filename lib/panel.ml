@@ -3,10 +3,10 @@ open Ray
 open Hitrec
 open Option
 
-type panel = { base : vec3; d1 : vec3; d2 : vec3 }
+type panel = { base : vec3; edge0 : vec3; edge1 : vec3 }
 
 let hit (r : ray) (t : panel) : hit_record option =
-  let v12, v13 = t.d1, t.d2 in
+  let v12, v13 = t.edge0, t.edge1 in
   let normal = vec_normalized (vec_cross v12 v13) in
   let proj = vec_dot normal r.direction in
   if proj -. Float.epsilon > 0.0 then none (* Hit inside face instead of the outside *)
@@ -33,5 +33,5 @@ let hit (r : ray) (t : panel) : hit_record option =
         else none (* Hit out of the panel *)
 
 let surface_area (p : panel) : float = 
-  let normal = vec_cross p.d1 p.d2 in
+  let normal = vec_cross p.edge0 p.edge1 in
   vec_len normal

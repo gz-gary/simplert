@@ -20,7 +20,7 @@ let sample_shape (p : primitives) : vec3 * float =
   | Panel p ->
       let u = Random.float 1.0 in
       let v = Random.float 1.0 in
-      (p.base +| u *| p.d1 +| v *| p.d2, 1.0 /. Panel.surface_area p)
+      (p.base +| u *| p.edge0 +| v *| p.edge1, 1.0 /. Panel.surface_area p)
   | Triangle t ->
       let u = Random.float 1.0 in
       let v = Random.float 1.0 in
