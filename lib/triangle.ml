@@ -31,3 +31,8 @@ let hit (r : ray) (t : triangle) : hit_record option =
             normal = normal;
           }
         else none (* Hit out of the triangle *)
+
+let surface_area (t : triangle) : float = 
+  let v12, v13 = (t.v2 -| t.v1), (t.v3 -| t.v1) in
+  let normal = vec_cross v12 v13 in
+  vec_len normal /. 2.0

@@ -31,3 +31,7 @@ let hit (r : ray) (t : panel) : hit_record option =
             normal = normal;
           }
         else none (* Hit out of the panel *)
+
+let surface_area (p : panel) : float = 
+  let normal = vec_cross p.d1 p.d2 in
+  vec_len normal

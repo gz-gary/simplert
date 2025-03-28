@@ -27,3 +27,6 @@ let hit (r : ray) (s : sphere) : hit_record option =
           hit_point = hit_point;
           normal = normal;
         }
+
+let surface_area (s : sphere) : float =
+  4.0 *. Float.pi *. s.radius *. s.radius
