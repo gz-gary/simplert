@@ -28,3 +28,4 @@ let sample_shape (p : primitives) : vec3 * float =
         ((u +. v -. 1.0) *| t.v1 +| (1.0 -. u) *| t.v2 +| (1.0 -. v) *| t.v3, 1.0 /. Triangle.surface_area t)
       else
         ((1.0 -. u -. v) *| t.v1 +| u *| t.v2 +| v *| t.v3, 1.0 /. Triangle.surface_area t)
+  | Box _ -> ((0.0, 0.0, 0.0), 0.0) (* TODO: sample box *)
