@@ -4,8 +4,8 @@ type brdf = vec3 -> vec3 -> vec3
 type light = vec3 -> vec3
 type material = BRDF of brdf | Light of light
 
-let lambert_brdf (_ : vec3) (_ : vec3) : vec3 = 
-  let rgb = (let rho = 1.0 in rho /. Float.pi) in (rgb, rgb, rgb)
+let lambert_brdf (rgb : vec3) (_ : vec3) (_ : vec3) : vec3 = 
+  rgb |/ Float.pi
 
 let fuse_light (rgbi : vec3) (_ : vec3) : vec3 =
   match rgbi with
