@@ -28,14 +28,15 @@ let () =
   Random.self_init();
   let width = 400 in
   let height = 400 in
-  let ratio = 0.008 in
+  let ratio = 0.005 in
   let multi_sampling_per_pix = 50 in
-  let eye = (0.0, 0.0, 0.3) in
-  let lookat = (0.0, 0.5, 0.0) in
+  let eye = (0.0, -1.0, 1.0) in
+  let lookat = (0.0, 1.0, 0.0) in
   let up = vec_normalized (0.0, 0.0, 1.0) in
-  let normalized_lookat = vec_normalized (lookat -| eye) +| eye in
-  let axis_y = vec_normalized (vec_cross (lookat -| eye) up) in
-  let axis_x = vec_normalized (vec_neg (vec_cross axis_y (lookat -| eye))) in
+  let view_dir = vec_normalized (lookat -| eye) in
+  let normalized_lookat = eye +| view_dir in
+  let axis_y = vec_normalized (vec_cross view_dir up) in
+  let axis_x = vec_normalized (vec_cross view_dir axis_y) in
   let corner = normalized_lookat -| ((float_of_int width /. 2.0) *. ratio *| axis_y) -| ((float_of_int height /. 2.0) *. ratio *| axis_x) in
   let example x y =
     vec_toint (List.fold_left ( +| ) (0.0, 0.0, 0.0) (
